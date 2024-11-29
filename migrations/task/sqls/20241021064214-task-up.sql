@@ -368,17 +368,16 @@ select
 from "CREDIT_PURCHASE" as cpu
 join "CREDIT_PACKAGE" as cpa on cpu.credit_package_id = cpa.id
 where extract(month from purchase_at) = 11
-group by cpa.name
+group by cpa.name;
 
 -- 6-4. 查詢：計算 11 月份總營收（使用 purchase_at 欄位統計）
 -- 顯示須包含以下欄位： 總營收
 select SUM(cpu.price_paid) as 總營收
 from "CREDIT_PURCHASE" as cpu
-where extract(month from purchase_at) = 11
+where extract(month from purchase_at) = 11;
 
 -- 6-5. 查詢：計算 11 月份有預約課程的會員人數（需使用 Distinct，並用 created_at 和 status 欄位統計）
 -- 顯示須包含以下欄位： 預約會員人數
 select count(distinct user_id) as 預約會員人數
 from "COURSE_BOOKING" cb
-where
-	extract(month from cb.created_at) = 11
+where extract(month from cb.created_at) = 11;
