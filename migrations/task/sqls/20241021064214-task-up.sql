@@ -321,8 +321,7 @@ inner join
 		from "COURSE_BOOKING"
 		where
 			user_id = (select id from "USER" where email = 'wXlTq@hexschooltest.io')
-			and
-			join_at notnull
+			and status = '課程已取消'
 		group by user_id
 	) as "COURSE_BOOKING"
 on "COURSE_BOOKING".user_id = "CREDIT_PURCHASE".user_id;
@@ -363,7 +362,7 @@ limit 1;
 -- 6-3. 查詢：計算 11 月份組合包方案的銷售數量
 -- 顯示須包含以下欄位： 組合包方案名稱, 銷售數量
 select
-	cpa.name as 組合包放案名稱,
+	cpa.name as 組合包方案名稱,
 	COUNT(cpu.purchased_credits) as 銷售數量
 from "CREDIT_PURCHASE" as cpu
 join "CREDIT_PACKAGE" as cpa on cpu.credit_package_id = cpa.id
